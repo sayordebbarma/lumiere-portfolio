@@ -1,7 +1,7 @@
-export default function Home() {
-  return (
-    <main>
-      <p className="text-white p-8">Lumière</p>
-    </main>
-  );
-}
+  export default function Home() {
+    return (
+      <main className='h-[300vh] w-full flex justify-center'>
+        <p className=' font-family-display font-bold text-2xl'>Lumière</p>
+      </main>
+    );
+  }
