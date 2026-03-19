@@ -3,6 +3,7 @@ import { Playfair_Display, DM_Mono } from 'next/font/google';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import '@/app/globals.css';
 import NavbarWrapper from "@/components/layout/NavbarWrapper";
+import Footer from "@/components/layout/Footer";
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body>
         <NavbarWrapper />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <Footer />
       </body>
     </html>
   );
