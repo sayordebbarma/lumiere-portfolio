@@ -19,12 +19,15 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       const tl = gsap.timeline({
         defaults: { ease: "power2.inOut" },
         onComplete: () => {
-          // Soft dissolve out — no wipe, just fade
           gsap.to(containerRef.current, {
             opacity: 0,
             duration: 1,
             ease: "power1.inOut",
             onComplete: () => {
+              if (containerRef.current) {
+                containerRef.current.style.display = "none";
+                containerRef.current.style.pointerEvents = "none";
+              }
               onComplete();
               window.dispatchEvent(new Event("lumiere:loaded"));
             },

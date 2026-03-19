@@ -29,11 +29,11 @@ body {
 /* @media (hover: hover) {
   * { cursor: none !important; }
 } */
-@media (hover: hover) {
+/* @media (hover: hover) {
   * {
     cursor: auto !important;
   }
-}
+} */
 
 /* Scroll indicator line */
 @keyframes scrollLine {
