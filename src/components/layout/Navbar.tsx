@@ -24,46 +24,46 @@ export default function Navbar({ isLoaded }: NavbarProps) {
     const lastScrollY = useRef(0);
     const pathname = usePathname();
 
-    // ── Entrance animation ───────────────────────────────────────────
+    // Entrance animation
     useEffect(() => {
         if (!isLoaded) return;
-
-        // Only set Y — opacity handled by CSS opacity-0 class
-        gsap.set(navRef.current, { y: -80 });
-
+      
+        gsap.set(navRef.current, { y: -60 });
+      
         const tl = gsap.timeline();
-
+      
         tl.to(navRef.current, {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
         });
-
+      
         tl.to(
-            linksRef.current,
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: "power2.out",
-            },
-            "-=0.4"
+          linksRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+          },
+          0
         );
-
+      
         tl.to(
-            contactRef.current,
-            {
-                opacity: 1,
-                x: 0,
-                duration: 0.6,
-                ease: "power2.out",
-            },
-            "-=0.4"
+          contactRef.current,
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
+          },
+          0
         );
-    }, [isLoaded]);
+      
+      }, [isLoaded]);
 
-    // ── Hide on scroll down, show on scroll up ───────────────────────
+    // Hide on scroll down, show on scroll up
     useEffect(() => {
         let isHidden = false;
 
@@ -73,31 +73,20 @@ export default function Navbar({ isLoaded }: NavbarProps) {
             if (!nav) return;
 
             if (currentScrollY < 20) {
-                // At very top — always show
                 if (isHidden) {
                     isHidden = false;
-                    gsap.to(nav, { y: 0, duration: 0.4, ease: "power2.out" });
+                    gsap.to(nav, { y: 0, duration: 0.8, ease: "power4.inOut" });
                 }
                 lastScrollY.current = currentScrollY;
                 return;
             }
 
             if (currentScrollY > lastScrollY.current && !isHidden) {
-                // Scrolling down — hide
                 isHidden = true;
-                gsap.to(nav, {
-                    y: "-100%",
-                    duration: 0.8,
-                    ease: "power4.inOut",
-                });
+                gsap.to(nav, { y: "-100%", duration: 0.8, ease: "power4.inOut" });
             } else if (currentScrollY < lastScrollY.current && isHidden) {
-                // Scrolling up — show
                 isHidden = false;
-                gsap.to(nav, {
-                    y: 0,
-                    duration: 0.8,
-                    ease: "power4.inOut",
-                });
+                gsap.to(nav, { y: 0, duration: 0.8, ease: "power4.inOut" });
             }
 
             lastScrollY.current = currentScrollY;
@@ -107,7 +96,7 @@ export default function Navbar({ isLoaded }: NavbarProps) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // ── Mobile menu animation ────────────────────────────────────────
+    // Mobile menu animation
     useEffect(() => {
         const menu = menuRef.current;
         if (!menu) return;
@@ -118,7 +107,6 @@ export default function Navbar({ isLoaded }: NavbarProps) {
                 duration: 0.7,
                 ease: "power4.inOut",
             });
-
             gsap.from(".mobile-link", {
                 yPercent: 100,
                 opacity: 0,
@@ -136,7 +124,6 @@ export default function Navbar({ isLoaded }: NavbarProps) {
         }
     }, [menuOpen]);
 
-    // ── Close menu on route change ───────────────────────────────────
     useEffect(() => {
         setMenuOpen(false);
     }, [pathname]);
@@ -146,36 +133,37 @@ export default function Navbar({ isLoaded }: NavbarProps) {
             <nav
                 ref={navRef}
                 className="fixed top-0 left-0 right-0 z-50
-                   px-8 md:px-14 h-16 flex items-center justify-between
-                   bg-[#f5f5f0]/80 backdrop-blur-md
-                   border-b border-[#0a0a0a]/06
+                   px-8 md:px-14 h-16
+                   flex items-center justify-between
+                   bg-bg/90 backdrop-blur-sm
+                   border-b border-[#0a0a0a]/4
                    opacity-0"
             >
                 {/* Logo */}
                 <Link
                     href="/"
-                    className="font-display text-[#0a0a0a] text-lg font-light
-                     tracking-tight hover:opacity-60
-                     transition-opacity duration-300"
+                    className="font-display font-light text-[#0a0a0a]
+                     text-xl tracking-tight
+                     hover:opacity-50 transition-opacity duration-500"
                 >
                     Lumière
                 </Link>
 
-                {/* Center links — desktop only */}
+                {/* Center links */}
                 <div
                     ref={linksRef}
-                    className="hidden md:flex items-center gap-10 absolute
-                     left-1/2 -translate-x-1/2 opacity-0"
+                    className="hidden md:flex items-center gap-10
+                     absolute left-1/2 -translate-x-1/2 opacity-0"
                 >
                     {navLinks.map((link) => (
                         <Link
                             key={link.label}
                             href={link.href}
-                            className={`font-mono text-[11px] tracking-[0.25em]
-                          uppercase transition-opacity duration-300
+                            className={`font-mono text-[10px] tracking-[0.25em]
+                          uppercase transition-opacity duration-500
                           ${pathname === link.href
-                                    ? "text-[#0a0a0a] opacity-100"
-                                    : "text-[#0a0a0a]/40 hover:opacity-100 hover:text-[#0a0a0a]"
+                                    ? "text-[#0a0a0a]"
+                                    : "text-[#0a0a0a]/35 hover:text-[#0a0a0a]"
                                 }`}
                         >
                             {link.label}
@@ -185,39 +173,39 @@ export default function Navbar({ isLoaded }: NavbarProps) {
 
                 {/* Right side */}
                 <div className="flex items-center gap-6">
-                    {/* Contact button — desktop */}
+                    {/* Contact — lighter border matching footer link style */}
                     <Link
                         ref={contactRef}
                         href="/contact"
                         className="hidden md:flex items-center opacity-0
-                       font-mono text-[11px] tracking-[0.25em] uppercase
-                       border border-[#0a0a0a]/20 px-5 py-2.5
-                       text-[#0a0a0a]/60 hover:text-[#0a0a0a]
-                       hover:border-[#0a0a0a]/60
-                       transition-all duration-300"
+                       font-mono text-[10px] tracking-[0.25em] uppercase
+                       border border-[#0a0a0a]/15 px-5 py-2.5
+                       text-[#0a0a0a]/40
+                       hover:text-[#0a0a0a] hover:border-[#0a0a0a]/40
+                       transition-all duration-500"
                     >
                         Contact
                     </Link>
 
-                    {/* Hamburger — mobile only */}
+                    {/* Hamburger */}
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="md:hidden flex flex-col gap-1.5 p-1"
                         aria-label="Toggle menu"
                     >
                         <span
-                            className={`block h-px w-6 bg-[#0a0a0a] transition-all
-                          duration-300 origin-center
+                            className={`block h-px w-5 bg-[#0a0a0a]/60 transition-all
+                          duration-500 origin-center
                           ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`}
                         />
                         <span
-                            className={`block h-px w-6 bg-[#0a0a0a] transition-all
-                          duration-300
+                            className={`block h-px w-5 bg-[#0a0a0a]/60 transition-all
+                          duration-500
                           ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
                         />
                         <span
-                            className={`block h-px w-6 bg-[#0a0a0a] transition-all
-                          duration-300 origin-center
+                            className={`block h-px w-5 bg-[#0a0a0a]/60 transition-all
+                          duration-500 origin-center
                           ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
                         />
                     </button>
@@ -227,35 +215,31 @@ export default function Navbar({ isLoaded }: NavbarProps) {
             {/* Mobile menu overlay */}
             <div
                 ref={menuRef}
-                className="fixed inset-0 z-40 bg-[#f5f5f0] flex flex-col
-                   items-start justify-end px-8 pb-16 md:hidden"
+                className="fixed inset-0 z-40 bg-bg flex flex-col
+                   items-start justify-end px-8 md:px-14 pb-16 md:hidden"
                 style={{ clipPath: "inset(0% 0% 100% 0%)" }}
             >
                 <div className="flex flex-col gap-0 mb-12 w-full">
-                    {[...navLinks, { label: "Contact", href: "/contact" }].map(
-                        (link) => (
-                            <div
-                                key={link.label}
-                                className="overflow-hidden border-b border-[#0a0a0a]/08 py-5"
+                    {[...navLinks, { label: "Contact", href: "/contact" }].map((link) => (
+                        <div
+                            key={link.label}
+                            className="overflow-hidden border-b border-[#0a0a0a]/06 py-5"
+                        >
+                            <Link
+                                href={link.href}
+                                className="mobile-link block font-display font-light
+                           text-[clamp(2.5rem,8vw,4rem)] text-[#0a0a0a]
+                           tracking-tight leading-none
+                           hover:opacity-40 transition-opacity duration-500"
                             >
-                                <Link
-                                    href={link.href}
-                                    className="mobile-link block font-display font-light
-                             text-[clamp(2.5rem,8vw,4rem)] text-[#0a0a0a]
-                             tracking-tight leading-none
-                             hover:opacity-50 transition-opacity duration-300"
-                                >
-                                    {link.label}
-                                </Link>
-                            </div>
-                        )
-                    )}
+                                {link.label}
+                            </Link>
+                        </div>
+                    ))}
                 </div>
 
-                <p
-                    className="font-mono text-[10px] tracking-[0.3em]
-                     text-[#0a0a0a]/30 uppercase"
-                >
+                <p className="font-mono text-[10px] tracking-[0.3em]
+                       text-[#0a0a0a]/25 uppercase">
                     Lumière © {new Date().getFullYear()}
                 </p>
             </div>
