@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Playfair_Display, DM_Mono } from 'next/font/google';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import '@/app/globals.css';
+import NavbarWrapper from "@/components/layout/NavbarWrapper";
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang='en' className={`${playfair.variable} ${dmMono.variable}`}>
       <body>
+        <NavbarWrapper />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>

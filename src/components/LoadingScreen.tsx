@@ -24,7 +24,10 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             opacity: 0,
             duration: 1,
             ease: "power1.inOut",
-            onComplete,
+            onComplete: () => {
+              onComplete();
+              window.dispatchEvent(new Event("lumiere:loaded"));
+            },
           });
         },
       });
