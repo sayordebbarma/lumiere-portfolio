@@ -226,7 +226,7 @@ useEffect(() => {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-[#f5f5f0]"
+      className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-bg"
     >
       {/* Scattered images */}
       {images.map((img, i) => (
