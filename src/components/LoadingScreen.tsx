@@ -84,7 +84,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] flex flex-col items-center
+      className="fixed inset-0 z-9999 flex flex-col items-center
                  justify-center bg-surface"
     >
       {/* Counter */}
