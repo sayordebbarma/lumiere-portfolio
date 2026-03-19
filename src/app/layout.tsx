@@ -4,6 +4,7 @@ import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import '@/app/globals.css';
 import NavbarWrapper from "@/components/layout/NavbarWrapper";
 import Footer from "@/components/layout/Footer";
+import PageTransition from "@/components/PageTransition";
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -33,7 +34,9 @@ export default function RootLayout({
     <html lang='en' className={`${playfair.variable} ${dmMono.variable}`}>
       <body>
         <NavbarWrapper />
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <SmoothScrollProvider>
+          <PageTransition>{children}</PageTransition>
+        </SmoothScrollProvider>
         <Footer />
       </body>
     </html>

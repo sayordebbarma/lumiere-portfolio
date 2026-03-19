@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { gsap } from "@/lib/gsap";
+import TransitionLink from "@/components/ui/TransitionLink";
+
 
 const navLinks = [
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
-    { label: "Gallery", href: "/#gallery" },
+    { label: "Gallery", href: "/gallery" },
 ];
 
 interface NavbarProps {
@@ -27,41 +29,41 @@ export default function Navbar({ isLoaded }: NavbarProps) {
     // Entrance animation
     useEffect(() => {
         if (!isLoaded) return;
-      
+
         gsap.set(navRef.current, { y: -60 });
-      
+
         const tl = gsap.timeline();
-      
+
         tl.to(navRef.current, {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "power3.out",
-        });
-      
-        tl.to(
-          linksRef.current,
-          {
-            opacity: 1,
             y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-          },
-          0
-        );
-      
-        tl.to(
-          contactRef.current,
-          {
             opacity: 1,
-            x: 0,
             duration: 0.9,
             ease: "power3.out",
-          },
-          0
+        });
+
+        tl.to(
+            linksRef.current,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                ease: "power3.out",
+            },
+            0
         );
-      
-      }, [isLoaded]);
+
+        tl.to(
+            contactRef.current,
+            {
+                opacity: 1,
+                x: 0,
+                duration: 0.9,
+                ease: "power3.out",
+            },
+            0
+        );
+
+    }, [isLoaded]);
 
     // Hide on scroll down, show on scroll up
     useEffect(() => {
@@ -156,36 +158,36 @@ export default function Navbar({ isLoaded }: NavbarProps) {
                      absolute left-1/2 -translate-x-1/2 opacity-0"
                 >
                     {navLinks.map((link) => (
-                        <Link
+                        <TransitionLink
                             key={link.label}
                             href={link.href}
                             className={`font-mono text-[10px] tracking-[0.25em]
-                          uppercase transition-opacity duration-500
-                          ${pathname === link.href
+                uppercase transition-opacity duration-500
+                ${pathname === link.href
                                     ? "text-[#0a0a0a]"
                                     : "text-[#0a0a0a]/35 hover:text-[#0a0a0a]"
                                 }`}
                         >
                             {link.label}
-                        </Link>
+                        </TransitionLink>
                     ))}
                 </div>
 
                 {/* Right side */}
                 <div className="flex items-center gap-6">
-                    {/* Contact — lighter border matching footer link style */}
-                    <Link
+                    {/* Contact button */}
+                    <TransitionLink
                         ref={contactRef}
                         href="/contact"
                         className="hidden md:flex items-center opacity-0
-                       font-mono text-[10px] tracking-[0.25em] uppercase
-                       border border-[#0a0a0a]/15 px-5 py-2.5
-                       text-[#0a0a0a]/40
-                       hover:text-[#0a0a0a] hover:border-[#0a0a0a]/40
-                       transition-all duration-500"
+             font-mono text-[10px] tracking-[0.25em] uppercase
+             border border-[#0a0a0a]/15 px-5 py-2.5
+             text-[#0a0a0a]/40 hover:text-[#0a0a0a]
+             hover:border-[#0a0a0a]/40
+             transition-all duration-500"
                     >
                         Contact
-                    </Link>
+                    </TransitionLink>
 
                     {/* Hamburger */}
                     <button

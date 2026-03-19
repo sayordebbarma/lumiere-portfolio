@@ -84,30 +84,30 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-9999 flex flex-col items-center
-                 justify-center bg-bg"
+      className="fixed inset-0 z-[9999] flex flex-col items-center
+                 justify-center bg-surface"
     >
       {/* Counter */}
       <span
         ref={counterRef}
-        className="font-mono text-[#0a0a0a]/30 text-[10px]
-                   tracking-[0.5em] mb-6 tabular-nums"
+        className="font-mono text-text/30 text-[10px]
+                   tracking-[0.5em] mb-2 tabular-nums"
       >
         {String(count).padStart(4, "0")}
       </span>
 
       {/* The line */}
-      <div className="relative w-48 h-px bg-[#0a0a0a]/10 mb-6">
+      <div className="relative w-48 h-px bg-text/10 mb-2">
         <div
           ref={lineRef}
-          className="absolute inset-0 bg-[#0a0a0a] origin-left scale-x-0"
+          className="absolute inset-0 bg-text origin-left scale-x-0"
         />
       </div>
 
       {/* Logo */}
       <p
         ref={logoRef}
-        className="font-display text-[#0a0a0a] text-sm font-light
+        className="font-display text-text text-sm font-light
                    opacity-0 tracking-[0.8em] uppercase"
       >
         Lumière
