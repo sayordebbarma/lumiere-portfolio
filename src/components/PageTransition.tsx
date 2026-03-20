@@ -25,12 +25,12 @@ export default function PageTransition({
         const text = textRef.current;
         if (!overlay || !text) return;
 
-        // ── Split and set start state BEFORE overlay becomes visible ──
+        // Split text
         const split = new SplitText(text, { type: "chars" });
         gsap.set(text, { visibility: "visible" });
         gsap.set(split.chars, { yPercent: 110, opacity: 0 });
 
-        // ── NOW make overlay visible ───────────────────────────────────
+        // Make overlay visible
         gsap.set(overlay, {
             scaleY: 1,
             transformOrigin: "top center",
@@ -80,7 +80,7 @@ export default function PageTransition({
             <div
                 ref={overlayRef}
                 data-transition-overlay
-                className="fixed inset-0 z-[9990] bg-surface
+                className="fixed inset-0 z-9990 bg-surface
                items-center justify-center
                origin-top pointer-events-none"
                 style={{ display: "none" }}
