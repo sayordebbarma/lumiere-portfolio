@@ -25,12 +25,10 @@ export default function PageTransition({
         const text = textRef.current;
         if (!overlay || !text) return;
 
-        // Split text
         const split = new SplitText(text, { type: "chars" });
         gsap.set(text, { visibility: "visible" });
         gsap.set(split.chars, { yPercent: 110, opacity: 0 });
 
-        // Make overlay visible
         gsap.set(overlay, {
             scaleY: 1,
             transformOrigin: "top center",
@@ -39,6 +37,7 @@ export default function PageTransition({
 
         const tl = gsap.timeline();
 
+        // Chars slip up
         tl.to(split.chars, {
             yPercent: 0,
             opacity: 1,
@@ -47,8 +46,10 @@ export default function PageTransition({
             ease: "power3.out",
         });
 
+        // Hold
         tl.to({}, { duration: 0.3 });
 
+        // Chars slip out
         tl.to(split.chars, {
             yPercent: -110,
             opacity: 0,
@@ -57,6 +58,7 @@ export default function PageTransition({
             ease: "power3.in",
         });
 
+        // Overlay wipes up
         tl.to(
             overlay,
             {
@@ -68,6 +70,13 @@ export default function PageTransition({
                     gsap.set(overlay, { display: "none" });
                     gsap.set(text, { visibility: "hidden" });
                     split.revert();
+
+                    // Wait 2 frames before signalling ready
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            window.dispatchEvent(new Event("lumiere:transition-complete"));
+                        });
+                    });
                 },
             },
             "-=0.2"
@@ -81,8 +90,8 @@ export default function PageTransition({
                 ref={overlayRef}
                 data-transition-overlay
                 className="fixed inset-0 z-9990 bg-surface
-               items-center justify-center
-               origin-top pointer-events-none"
+                   items-center justify-center
+                   origin-top pointer-events-none"
                 style={{ display: "none" }}
             >
                 <div className="overflow-hidden">

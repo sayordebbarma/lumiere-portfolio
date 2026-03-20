@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
+import { usePageReady } from "@/hooks/usePageReady";
 
 const services = [
   {
@@ -39,8 +40,10 @@ export default function About() {
   const hoverImageRef = useRef<HTMLDivElement>(null);
   const hoverImgElRef = useRef<HTMLImageElement>(null);
   const clipTween = useRef<gsap.core.Tween | null>(null);
+  const ctxRef = useRef<ReturnType<typeof gsap.context> | null>(null);
   const [activeService, setActiveService] = useState<number | null>(null);
   const router = useRouter();
+  const pageReady = usePageReady();
 
   const getClipMid = () => {
     const el = hoverImageRef.current;
@@ -73,6 +76,7 @@ export default function About() {
     });
   };
 
+  // Clip init — runs immediately, no gate needed
   useEffect(() => {
     const el = hoverImageRef.current;
     if (!el) return;
@@ -81,98 +85,109 @@ export default function About() {
       const mid = el.offsetHeight / 2;
       el.style.clipPath = `inset(${mid}px 0px ${mid}px 0px)`;
     });
+  }, []);
 
-    const ctx = gsap.context(() => {
+  // All animations — gated on pageReady
+  useEffect(() => {
+    if (!pageReady) return;
 
-      // Name reveal
-      const nameSplit = new SplitText(nameRef.current, { type: "chars" });
-      gsap.set(nameSplit.chars, { yPercent: 110, opacity: 0 });
-      gsap.to(nameSplit.chars, {
-        yPercent: 0,
-        opacity: 1,
-        stagger: 0.03,
-        duration: 1.2,
-        ease: "power4.out",
-        delay: 1.0,
+    // Small buffer after transition fully clears
+    const timer = gsap.delayedCall(0.15, () => {
+
+      const ctx = gsap.context(() => {
+
+        // Name reveal
+        const nameSplit = new SplitText(nameRef.current, { type: "chars" });
+        gsap.set(nameSplit.chars, { yPercent: 110, opacity: 0 });
+        gsap.to(nameSplit.chars, {
+          yPercent: 0,
+          opacity: 1,
+          stagger: 0.03,
+          duration: 1.4,
+          ease: "power4.out",
+        });
+
+        // Index
+        gsap.from(indexRef.current, {
+          opacity: 0,
+          y: -10,
+          duration: 1,
+          delay: 0.1,
+          ease: "power2.out",
+        });
+
+        // Bio lines
+        const bioSplit = new SplitText(bioRef.current, {
+          type: "lines",
+          linesClass: "overflow-hidden",
+        });
+        gsap.from(bioSplit.lines, {
+          yPercent: 110,
+          opacity: 0,
+          stagger: 0.12,
+          duration: 1.1,
+          delay: 0.1,
+          ease: "power3.out",
+        });
+
+        // Services stagger in
+        gsap.from(".service-item", {
+          opacity: 0,
+          x: 20,
+          stagger: 0.1,
+          duration: 1,
+          delay: 0.15,
+          ease: "power3.out",
+        });
+
+        // Section 1 fades out on scroll
+        gsap.to(sectionOneRef.current, {
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionOneRef.current,
+            start: "80% top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        // Portrait parallax
+        gsap.to(portraitRef.current, {
+          yPercent: 12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionTwoRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+
+        // Label reveal
+        gsap.from(labelRef.current, {
+          opacity: 0,
+          y: 20,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionTwoRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        });
       });
 
-      // Index
-      gsap.from(indexRef.current, {
-        opacity: 0,
-        y: -10,
-        duration: 0.8,
-        delay: 1.2,
-        ease: "power2.out",
-      });
-
-      // Bio lines
-      const bioSplit = new SplitText(bioRef.current, {
-        type: "lines",
-        linesClass: "overflow-hidden",
-      });
-      gsap.from(bioSplit.lines, {
-        yPercent: 110,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 1,
-        delay: 1.1,
-        ease: "power3.out",
-      });
-
-      // Services stagger in
-      gsap.from(".service-item", {
-        opacity: 0,
-        x: 20,
-        stagger: 0.08,
-        duration: 0.8,
-        delay: 1.2,
-        ease: "power3.out",
-      });
-
-      // Section 1 fades out on scroll
-      gsap.to(sectionOneRef.current, {
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionOneRef.current,
-          start: "80% top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      // Portrait parallax
-      gsap.to(portraitRef.current, {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionTwoRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.5,
-        },
-      });
-
-      // Label reveal
-      gsap.from(labelRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionTwoRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
-
+      // Store ctx for cleanup
+      ctxRef.current = ctx;
     });
 
     return () => {
-      ctx.revert();
+      timer.kill();
+      ctxRef.current?.revert();
       clipTween.current?.kill();
     };
-  }, []);
+  }, [pageReady]);
 
   const handleServiceEnter = (index: number) => {
     setActiveService(index);
@@ -229,7 +244,7 @@ export default function About() {
         {/* Hover image */}
         <div
           ref={hoverImageRef}
-          className="absolute left-0 right-0 pointer-events-none z-5"
+          className="absolute left-0 right-0 pointer-events-none z-[5]"
           style={{ top: "37.5%", height: "25%" }}
         >
           <img
@@ -268,9 +283,9 @@ export default function About() {
                              text-[clamp(1rem,2vw,1.4rem)] tracking-tight
                              leading-none transition-opacity duration-300
                              ${activeService === i
-                               ? "text-text opacity-100"
-                               : "text-text/30"
-                             }`}
+                    ? "text-text opacity-100"
+                    : "text-text/30"
+                  }`}
               >
                 {service.label}
               </span>
