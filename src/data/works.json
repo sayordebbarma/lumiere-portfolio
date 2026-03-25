@@ -1,0 +1,183 @@
+[
+  {
+    "id": "01",
+    "slug": "alpine-solitude",
+    "title": "Alpine Solitude",
+    "category": "Photography",
+    "type": "image",
+    "location": "Swiss Alps",
+    "year": "2024",
+    "description": "A study of silence and scale. Shot over three days in the Swiss Alps during the first snowfall of the season, this series explores the relationship between human presence and vast, indifferent landscape.",
+    "tags": [
+      "Landscape",
+      "Nature",
+      "Winter",
+      "Alps"
+    ],
+    "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+      "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&q=80"
+    ],
+    "size": "large"
+  },
+  {
+    "id": "02",
+    "slug": "coastal-light",
+    "title": "Coastal Light",
+    "category": "Photography",
+    "type": "image",
+    "location": "Norway",
+    "year": "2024",
+    "description": "The Norwegian coastline at dusk. Chasing the last light across fjords and rocky shores, this work documents the ephemeral quality of light at the edge of the world.",
+    "tags": [
+      "Coast",
+      "Ocean",
+      "Norway",
+      "Light"
+    ],
+    "src": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80"
+    ],
+    "size": "small"
+  },
+  {
+    "id": "03",
+    "slug": "foggy-valley",
+    "title": "Foggy Valley",
+    "category": "Videography",
+    "type": "video",
+    "location": "Scotland",
+    "year": "2023",
+    "description": "A short film about the Scottish Highlands in autumn. Fog rolling through valleys, red deer at dawn, and the strange melancholy of beautiful emptiness.",
+    "tags": [
+      "Film",
+      "Scotland",
+      "Highlands",
+      "Fog"
+    ],
+    "src": "https://videos.pexels.com/video-files/4763824/4763824-hd_1920_1080_25fps.mp4",
+    "poster": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+      "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&q=80"
+    ],
+    "size": "small"
+  },
+  {
+    "id": "04",
+    "slug": "forest-sequence",
+    "title": "Forest Sequence",
+    "category": "Photography",
+    "type": "image",
+    "location": "Canada",
+    "year": "2023",
+    "description": "Old growth forest in British Columbia. Ancient trees, cathedral light, and the profound quiet of a place that has never known noise.",
+    "tags": [
+      "Forest",
+      "Canada",
+      "Nature",
+      "Light"
+    ],
+    "src": "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800&q=80",
+      "https://images.unsplash.com/photo-1490750967868-88df5691cc87?w=800&q=80",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80"
+    ],
+    "size": "medium"
+  },
+  {
+    "id": "05",
+    "slug": "golden-hour",
+    "title": "Golden Hour",
+    "category": "Photography",
+    "type": "image",
+    "location": "Iceland",
+    "year": "2023",
+    "description": "Iceland in the midnight sun. When the sun refuses to set, light becomes something else entirely — a permanent golden suspension that warps time.",
+    "tags": [
+      "Iceland",
+      "Golden Hour",
+      "Landscape",
+      "Light"
+    ],
+    "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+    ],
+    "size": "small"
+  },
+  {
+    "id": "06",
+    "slug": "urban-drift",
+    "title": "Urban Drift",
+    "category": "Videography",
+    "type": "video",
+    "location": "Tokyo",
+    "year": "2022",
+    "description": "Tokyo at 3am. A city that never truly sleeps, filmed during the quiet hours when the streets belong to nobody and everybody at once.",
+    "tags": [
+      "Urban",
+      "Tokyo",
+      "Night",
+      "Film"
+    ],
+    "src": "https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4",
+    "poster": "https://images.unsplash.com/photo-1490750967868-88df5691cc87?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800&q=80",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80"
+    ],
+    "size": "large"
+  },
+  {
+    "id": "07",
+    "slug": "still-waters",
+    "title": "Still Waters",
+    "category": "Photography",
+    "type": "image",
+    "location": "Norway",
+    "year": "2022",
+    "description": "Mirror lakes in Lofoten. The reflection is so perfect it becomes unclear which is real — the mountain or its double.",
+    "tags": [
+      "Norway",
+      "Lakes",
+      "Reflection",
+      "Landscape"
+    ],
+    "src": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80"
+    ],
+    "size": "small"
+  },
+  {
+    "id": "08",
+    "slug": "beneath-the-surface",
+    "title": "Beneath the Surface",
+    "category": "Photography",
+    "type": "image",
+    "location": "Maldives",
+    "year": "2022",
+    "description": "Underwater photography in the Maldives. Silence as a physical substance. Light bending through water into something sacred.",
+    "tags": [
+      "Ocean",
+      "Underwater",
+      "Maldives",
+      "Light"
+    ],
+    "src": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1490750967868-88df5691cc87?w=800&q=80",
+      "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+    ],
+    "size": "medium"
+  }
+]

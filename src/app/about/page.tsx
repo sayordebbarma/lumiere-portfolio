@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
+import { gsap, SplitText } from "@/lib/gsap";
 import { usePageReady } from "@/hooks/usePageReady";
 
 const services = [
@@ -244,7 +244,7 @@ export default function About() {
         {/* Hover image */}
         <div
           ref={hoverImageRef}
-          className="absolute left-0 right-0 pointer-events-none z-[5]"
+          className="absolute left-0 right-0 pointer-events-none z-5"
           style={{ top: "37.5%", height: "25%" }}
         >
           <img
