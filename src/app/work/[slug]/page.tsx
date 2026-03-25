@@ -32,12 +32,8 @@ export default function WorkDetail() {
         const ctx = gsap.context(() => {
             const tl = gsap.timeline();
 
-            // ✅ Initial state for back button (prevents early flash)
-            gsap.set(backBtnRef.current, {
-                opacity: 0,
-                y: -10,
-                filter: "blur(6px)",
-            });
+            // Initial state for back button
+            gsap.set(backBtnRef.current, { y: -10, filter: "blur(6px)" });
 
             // Shared element transition
             if (savedRect && heroImgRef.current) {
@@ -179,7 +175,7 @@ export default function WorkDetail() {
             {/* BACK BUTTON */}
             <div
                 ref={backBtnRef}
-                className="fixed top-24 md:top-24 left-6 md:left-14 z-9999"
+                className="fixed top-24 md:top-24 left-6 md:left-14 z-9999 opacity-0"
             >
                 <Link
                     href="/work"
