@@ -10,7 +10,6 @@ import TransitionLink from "@/components/ui/TransitionLink";
 const navLinks = [
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
-    { label: "Gallery", href: "/gallery" },
 ];
 
 interface NavbarProps {
@@ -179,14 +178,25 @@ export default function Navbar({ isLoaded }: NavbarProps) {
                     <TransitionLink
                         ref={contactRef}
                         href="/contact"
-                        className="hidden md:flex items-center opacity-0
+                        className="group relative hidden md:flex items-center justify-center
+             opacity-0 overflow-hidden
              font-mono text-[10px] tracking-[0.25em] uppercase
              border border-[#0a0a0a]/15 px-5 py-2.5
              text-[#0a0a0a]/40 hover:text-[#0a0a0a]
              hover:border-[#0a0a0a]/40
              transition-all duration-500"
                     >
-                        Contact
+                        {/* glow / sweep effect */}
+                        <span className="pointer-events-none absolute inset-0 opacity-0
+                   group-hover:opacity-100
+                   bg-linear-to-r from-transparent via-black/10 to-transparent
+                   -translate-x-full group-hover:translate-x-full
+                   transition-all duration-700" />
+
+                        {/* content */}
+                        <span className="relative z-10">
+                            Contact
+                        </span>
                     </TransitionLink>
 
                     {/* Hamburger */}
